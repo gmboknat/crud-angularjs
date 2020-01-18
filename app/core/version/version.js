@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('crudApp.version', [
-  'myApp.version.interpolate-filter',
-  'myApp.version.version-directive'
+  'crudApp.version.interpolate-filter',
+  'crudApp.version.version-directive'
 ])
 
 .value('version', '0.1');
