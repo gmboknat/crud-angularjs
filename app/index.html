@@ -8,14 +8,16 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>My AngularJS App</title>
+    <title>CRUD AngularJS</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <link rel="stylesheet" href="lib/angular-material/angular-material.css" />
+    <link href="lib/angular-material-data-table/dist/md-data-table.min.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body ng-cloak layout="column" ng-controller="AppController as app">
-    <!-- Container #1 (see wireframe) -->
+  <body ng-cloak layout="column" ng-controller="AppController as vm">
     <md-toolbar>
       <div class="md-toolbar-tools">
         <md-button ng-href="#!/home">
@@ -27,13 +29,6 @@
         
       </div>
     </md-toolbar>
-    <!--[if lt IE 7]>
-      <p class="browsehappy">
-        You are using an <strong>outdated</strong> browser. Please
-        <a href="http://browsehappy.com/">upgrade your browser</a> to improve
-        your experience.
-      </p>
-    <![endif]-->
 
     <div ng-view></div>
 
@@ -48,6 +43,8 @@
     <script src="lib/angular-messages/angular-messages.js"></script>
     <script src="lib/angular-sanitize/angular-sanitize.js"></script>
     <script src="lib/angular-material/angular-material.js"></script>
+    <script src="lib/angular-material-data-table/dist/md-data-table.min.js"></script>
+
     <script src="app.module.js"></script>
     <script src="app.config.js"></script>
     <script src="app.controller.js"></script>
@@ -60,6 +57,11 @@
     <script src="modules/contact/contact.module.js"></script>
     <script src="modules/contact/contact.routes.js"></script>
     <script src="modules/contact/contact.controller.js"></script>
+
+    <script src="modules/services/contact.factory.js"></script>
+    <script src="modules/services/toast.factory.js"></script>
+
+
 
 
   </body>

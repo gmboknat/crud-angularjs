@@ -6,9 +6,14 @@
       .module("crudApp.contact")
       .controller("ContactController", ContactController);
   
-    ContactController.$inject = [];
+    ContactController.$inject = ["$scope", "ContactService"];
     
-    function ContactController() {
+    function ContactController($scope, ContactService) {
+      $scope.desserts = [{name: 'SAmpe'}]
+
+      ContactService.getAll().then(result => {
+        console.log('Contact getAll', result)
+      })
     }
   
   })();

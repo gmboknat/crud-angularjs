@@ -1,1 +1,16 @@
-<h1>This is a contact page</h1>
+<h3 class="md-headline">List of Contacts</h3>
+
+<md-table-container>
+    <table md-table>
+      <thead md-head md-order="myOrder">
+        <!-- when the user clicks this cell, the myOrder variable will get the value 'nameToLower' -->
+        <th md-column md-order-by="nameToLower">Dessert (100g serving)</th>
+        <!-- the variable myOrder will not be changed when this cell is clicked -->
+        <th md-column md-numeric>Calories</th>
+      </thead>
+      <tbody md-body>
+        <!-- we can let ng-repeat sort the columns for us -->
+        <tr ng-repeat="dessert in desserts | orderBy: myOrder"></tr>
+      </tbody>
+    </table>
+  </md-table-container>
