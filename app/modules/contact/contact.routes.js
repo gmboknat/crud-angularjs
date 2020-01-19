@@ -11,7 +11,8 @@
     function routeConfig($routeProvider) {
       $routeProvider.when('/contact', {
         templateUrl: 'modules/contact/contact.html',
-        controller: 'ContactController'
+        controller: 'ContactController',
+        controllerAs: 'vm'
       });
     }
   
