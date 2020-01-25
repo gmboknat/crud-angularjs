@@ -10,13 +10,17 @@
         getAll: getAll,
       };
   
-      function getAll() {
-        return $http.get('https://crud-sails.herokuapp.com/contact')
+      function getAll(query) {
+        console.log('getAll', query)
+        const skip = (query.page - 1) * query.limit;
+        let stringQuery = `?skip=${skip}&limit=${query.limit}` 
+        console.log('stringQuery', stringQuery)
+        return $http.get('https://crud-sails.herokuapp.com/contact' + stringQuery)
             .then(function(result) {
                 return result.data;
             })
             .catch(function(err) {
-                console.log('errrror', err)
+                console.warn('errrror', err)
             });
       }
   

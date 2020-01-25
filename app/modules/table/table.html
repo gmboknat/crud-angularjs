@@ -18,34 +18,38 @@
           <md-checkbox ng-model="options.decapitate">Decapitate</md-checkbox>
           <md-checkbox ng-model="options.largeEditDialog">Lard Edit Dialogs</md-checkbox>
           <md-checkbox ng-model="options.boundaryLinks">Pagination Boundary Links</md-checkbox>
-          <md-checkbox ng-model="options.limitSelect" ng-click="toggleLimitOptions()">Pagination Limit Select</md-checkbox>
           <md-checkbox ng-model="options.pageSelect">Pagination Page Select</md-checkbox>
         </div>
       </md-card>
       
       <md-card>
         
-        <md-toolbar class="md-table-toolbar md-default" ng-hide="options.rowSelection && selected.length">
+        <md-toolbar class="md-table-toolbar md-default" ng-hide="options.rowSelection && vm.selected.length">
           <div class="md-toolbar-tools">
             <span>Nutrition</span>
             <div flex></div>
-            <md-button class="md-icon-button" ng-click="loadStuff()">
+            <md-button class="md-icon-button" ng-click="vm.loadStuff()">
               <md-icon>refresh</md-icon>
             </md-button>
           </div>
         </md-toolbar>
         
-        <md-toolbar class="md-table-toolbar alternate" ng-show="options.rowSelection && selected.length">
+        <md-toolbar class="md-table-toolbar alternate" ng-show="options.rowSelection && vm.selected.length">
           <div class="md-toolbar-tools">
-            <span>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</span>
+            <span>{{vm.selected.length}} {{vm.selected.length > 1 ? 'items' : 'item'}} selected</span>
           </div>
         </md-toolbar>
         
         <md-table-container>
-          <table md-table md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise">
-            <thead ng-if="!options.decapitate" md-head md-order="query.order" md-on-reorder="logOrder">
+          <table md-table md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="vm.selected" md-progress="vm.promise">
+            <thead ng-if="!options.decapitate" md-head md-order="vm.query.order" md-on-reorder="logOrder">
               <tr md-row>
-                <th md-column md-order-by="name"><span>Dessert (100g serving)</span></th>
+                <th md-column md-order-by="firstname"><span>First Name</span></th>
+                <th md-column md-order-by="lastname"><span>Last Name</span></th>
+                <th md-column md-order-by="email"><span>Email Address</span></th>
+                <th md-column md-order-by="phone"><span>Phone Number</span></th>
+
+                <!-- <th md-column md-order-by="name"><span>Dessert (100g serving)</span></th>
                 <th md-column md-order-by="type"><span>Type</span></th>
                 <th md-column md-numeric md-order-by="calories.value" md-desc><span>Calories</span></th>
                 <th md-column md-numeric md-order-by="fat.value"><span>Fat (g)</span></th>
@@ -57,18 +61,22 @@
                 <th md-column md-order-by="comment">
                   <md-icon>comments</md-icon>
                   <span>Comments</span>
-                </th>
+                </th> -->
               </tr>
             </thead>
             <tbody md-body>
-              <tr md-row md-select="dessert" md-on-select="logItem" md-auto-select="options.autoSelect" ng-disabled="dessert.calories.value > 400" ng-repeat="dessert in desserts.data | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
-                <td md-cell>{{dessert.name}}</td>
-                <td md-cell>
+              <tr md-row md-select="contact" md-on-select="vm.logItem" md-auto-select="options.autoSelect" ng-repeat="contact in vm.contacts.data">
+                <td md-cell>{{contact.firstname}}</td>
+                <td md-cell>{{contact.lastname}}</td>
+                <td md-cell>{{contact.email}}</td>
+                <td md-cell>{{contact.phone}}</td>
+
+                <!-- <td md-cell>
                   <md-select ng-model="dessert.type" placeholder="Other">
                     <md-option ng-value="type" ng-repeat="type in getTypes()">{{type}}</md-option>
                   </md-select>
-                </td>
-                <td md-cell>{{dessert.calories.value}}</td>
+                </td> -->
+                <!-- <td md-cell>{{dessert.calories.value}}</td>
                 <td md-cell>{{dessert.fat.value | number: 2}}</td>
                 <td md-cell>{{dessert.carbs.value}}</td>
                 <td md-cell>{{dessert.protein.value | number: 2}}</td>
@@ -77,13 +85,13 @@
                 <td md-cell hide-gt-xs show-gt-lg>{{dessert.iron.value}}%</td>
                 <td md-cell ng-click="editComment($event, dessert)" ng-class="{'md-placeholder': !dessert.comment}">
                   {{dessert.comment || 'Add a comment'}}
-                </td>
+                </td> -->
               </tr>
             </tbody>
           </table>
         </md-table-container>
 
-        <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{desserts.count}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
+        <md-table-pagination md-limit="vm.query.limit" md-limit-options="vm.limitOptions" md-page="vm.query.page" md-total="{{vm.contacts.count}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="vm.logPagination"></md-table-pagination>
       </md-card>
     </md-content>
     

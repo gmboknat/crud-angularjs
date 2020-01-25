@@ -11,7 +11,8 @@
     function routeConfig($routeProvider) {
         $routeProvider.when("/table", {
             templateUrl: "modules/table/table.html",
-            controller: "TableController"
+            controller: "TableController",
+            controllerAs: 'vm'
           });
     }
   
