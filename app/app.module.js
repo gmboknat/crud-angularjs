@@ -7,6 +7,8 @@
       "ngRoute",
       "crudApp.home",
       "crudApp.contact",
+      "crudApp.table",
+
       "ngAria",
       "ngAnimate",
       "ngMessages",
