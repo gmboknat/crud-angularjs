@@ -19,10 +19,20 @@
       page: 1
     };
 
+    vm.options = {
+      rowSelection: true,
+      multiSelect: true,
+      autoSelect: true,
+      boundaryLinks: false,
+      limitSelect: true,
+      pageSelect: true
+    };
 
+    // functions
     vm.loadStuff = loadStuff;
     vm.logItem = logItem;
     vm.logPagination = logPagination;
+    vm.toggleFilter = toggleFilter;
 
     // Init
     vm.loadStuff();
@@ -45,18 +55,13 @@
       console.log('vm.query', vm.query, $scope.options.pageSelect)
       vm.loadStuff();
     };
+
+    function toggleFilter() {
+      vm.isFilterEnabled = !vm.isFilterEnabled;
+    }
     // /////
 
-    $scope.options = {
-      rowSelection: true,
-      multiSelect: true,
-      autoSelect: true,
-      decapitate: false,
-      largeEditDialog: false,
-      boundaryLinks: false,
-      limitSelect: true,
-      pageSelect: true
-    };
+    
 
     
 
