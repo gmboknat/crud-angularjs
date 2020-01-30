@@ -1,21 +1,21 @@
 (function() {
     "use strict";
   
-    angular.module("crudApp").factory("ContactService", ContactService);
+    angular.module("crudApp").factory("AccountService", AccountService);
 
-    ContactService.$inject = ['$http'];
+    AccountService.$inject = ['$http'];
   
-    function ContactService($http) {
+    function AccountService($http) {
       return {
         getAll: getAll,
       };
   
       function getAll(query) {
         console.log('getAll', query)
-        const skip = (query.page - 1) * query.limit;
-        let stringQuery = `?skip=${skip}&limit=${query.limit}` 
+        let stringQuery = `?page=${query.page}&limit=${query.limit}` 
+        if (query.search) stringQuery += `&search=${query.search}`;
         console.log('stringQuery', stringQuery)
-        return $http.get('https://crud-sails.herokuapp.com/contact' + stringQuery)
+        return $http.get('https://crud-sails.herokuapp.com/account' + stringQuery)
             .then(function(result) {
                 return result.data;
             })

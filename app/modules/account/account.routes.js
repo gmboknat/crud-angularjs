@@ -3,15 +3,15 @@
     
     // Declare app level module which depends on views, and core components
     angular
-      .module("crudApp.contact")
+      .module("crudApp.account")
       .config(routeConfig);
   
     routeConfig.$inject = ["$routeProvider"];
     
     function routeConfig($routeProvider) {
-      $routeProvider.when('/contact', {
-        templateUrl: 'modules/contact/contact.html',
-        controller: 'ContactController',
+      $routeProvider.when('/account', {
+        templateUrl: 'modules/account/account.html',
+        controller: 'AccountController',
         controllerAs: 'vm'
       });
     }

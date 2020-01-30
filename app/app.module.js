@@ -6,9 +6,7 @@
     .module("crudApp", [
       "ngRoute",
       "crudApp.home",
-      "crudApp.contact",
-      "crudApp.table",
-
+      "crudApp.account",
       "ngAria",
       "ngAnimate",
       "ngMessages",

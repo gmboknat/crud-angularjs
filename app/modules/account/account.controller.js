@@ -2,21 +2,22 @@
   "use strict";
 
   angular
-    .module("crudApp.table")
-    .controller("TableController", TableController);
+    .module("crudApp.account")
+    .controller("AccountController", AccountController);
 
-  TableController.$inject = ["$mdEditDialog", "$q", "$scope", "$timeout", "$http", "ContactService"];
+  AccountController.$inject = ["$mdEditDialog", "$q", "$scope", "AccountService"];
 
-  function TableController($mdEditDialog, $q, $scope, $timeout, $http, ContactService) {
+  function AccountController($mdEditDialog, $q, $scope, AccountService) {
     let vm = this;
 
     vm.contacts = {}
     vm.selected = [];
     vm.limitOptions = [5, 10, 15];
     vm.query = {
-      order: "name",
+      order: "firstname",
       limit: 5,
-      page: 1
+      page: 1,
+      search: ''
     };
 
     vm.options = {
@@ -29,17 +30,19 @@
     };
 
     // functions
-    vm.loadStuff = loadStuff;
+    vm.getAccounts = getAccounts;
     vm.logItem = logItem;
     vm.logPagination = logPagination;
     vm.toggleFilter = toggleFilter;
+    vm.filterAccounts = filterAccounts;
+    vm.refreshAccounts = refreshAccounts;
 
     // Init
-    vm.loadStuff();
+    vm.getAccounts();
 
 
-    function loadStuff() {
-       vm.promise = ContactService.getAll(vm.query).then(result => {
+    function getAccounts() {
+       vm.promise = AccountService.getAll(vm.query).then(result => {
         vm.contacts = result;
         console.log('vm.contacts', vm.contacts)
       });
@@ -52,12 +55,29 @@
     function logPagination(page, limit) {
       console.log("page: ", page);
       console.log("limit: ", limit);
-      console.log('vm.query', vm.query, $scope.options.pageSelect)
-      vm.loadStuff();
+      console.log('vm.query', vm.query, vm.options.pageSelect)
+      vm.getAccounts();
     };
 
     function toggleFilter() {
       vm.isFilterEnabled = !vm.isFilterEnabled;
+    }
+
+    function filterAccounts(isValid) {
+      if (isValid) {
+        console.log('filtering')
+        vm.getAccounts()
+      }
+    }
+
+    function refreshAccounts() {
+      vm.query = {
+        order: "firstname",
+        limit: 5,
+        page: 1,
+        search: ''
+      };
+      vm.getAccounts();
     }
     // /////
 
@@ -91,11 +111,8 @@
 
       var promise;
 
-      if ($scope.options.largeEditDialog) {
-        promise = $mdEditDialog.large(editDialog);
-      } else {
-        promise = $mdEditDialog.small(editDialog);
-      }
+      
+      promise = $mdEditDialog.small(editDialog);
 
       promise.then(function(ctrl) {
         var input = ctrl.getInput();

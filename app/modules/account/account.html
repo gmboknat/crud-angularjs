@@ -1,10 +1,4 @@
 <div layout="column">
-  <md-toolbar class="md-whiteframe-1dp">
-    <div class="md-toolbar-tools">
-      <div class="md-title">Material Design Data Table</div>
-    </div>
-  </md-toolbar>
-
   <md-content laout="column" flex>
     <md-card>
       <md-toolbar
@@ -12,26 +6,29 @@
         ng-hide="vm.selected.length"
       >
         <div class="md-toolbar-tools" ng-if="!vm.isFilterEnabled">
-          <span>Nutrition</span>
+          <span>List of Accounts</span>
           <div flex></div>
-          <md-button class="md-icon-button" ng-click="vm.loadStuff()">
+          <md-button class="md-icon-button" ng-click="vm.refreshAccounts()">
             <md-icon>refresh</md-icon>
           </md-button>
           <md-button class="md-icon-button" ng-click="vm.toggleFilter()">
             <md-icon>filter_list</md-icon>
           </md-button>
           <md-button class="md-icon-button">
-            <md-icon>more_vert</md-icon>
+            <md-icon>person_add</md-icon>
           </md-button>
         </div>
 
         <div class="md-toolbar-tools" ng-if="vm.isFilterEnabled">
           <md-icon class="material-icons">search</md-icon>
-          <form name="filterForm" flex>
+          <form name="filterForm" flex ng-submit="vm.filterAccounts(filterForm.$valid)">
             <input
-              ng-model="filterText"
+              ng-model="vm.query.search"
               placeholder="Search"
               aria-label="Search"
+              name="search"
+              required
+              ng-blur="vm.filterAccounts(filterForm.$valid)"
             />
           </form>
           <md-button
