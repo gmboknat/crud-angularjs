@@ -16,7 +16,15 @@
 
     function getAll(query) {
       console.log('getAll', query)
-      let stringQuery = `?page=${query.page}&limit=${query.limit}`
+      let order = query.order;
+      if (order) {
+        if (order.search('-') > -1) {
+          order = order.slice(1, order.length) + ' ASC';
+        } else {
+          order += ' DESC'
+        }
+      }
+      let stringQuery = `?page=${query.page}&limit=${query.limit}&sort=${order}`
       if (query.search) stringQuery += `&search=${query.search}`;
       console.log('stringQuery', stringQuery)
       return $http.get(backendUrl + stringQuery)

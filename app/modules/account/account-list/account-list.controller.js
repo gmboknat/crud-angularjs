@@ -14,7 +14,7 @@
     vm.selected = [];
     vm.limitOptions = [5, 10, 15];
     vm.query = {
-      order: "firstname",
+      order: "",
       limit: 5,
       page: 1,
       search: ''
@@ -149,7 +149,10 @@
     
 
     $scope.logOrder = function(order) {
-      console.log("order: ", order);
+      console.log("order: ", order, vm.query.order);
+      
+      vm.getAccounts();
+
     };
   }
 
