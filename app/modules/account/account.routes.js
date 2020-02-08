@@ -10,8 +10,8 @@
     
     function routeConfig($routeProvider) {
       $routeProvider.when('/account', {
-        templateUrl: 'modules/account/account.html',
-        controller: 'AccountController',
+        templateUrl: 'modules/account/account-list/account-list.html',
+        controller: 'AccountListController',
         controllerAs: 'vm'
       });
     }

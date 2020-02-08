@@ -3,11 +3,11 @@
 
   angular
     .module("crudApp.account")
-    .controller("AccountController", AccountController);
+    .controller("AccountListController", AccountListController);
 
-  AccountController.$inject = ["$mdEditDialog", "$q", "$scope", "AccountService"];
+  AccountListController.$inject = ["$mdEditDialog", "$q", "$scope", "AccountService", "$mdDialog"];
 
-  function AccountController($mdEditDialog, $q, $scope, AccountService) {
+  function AccountListController($mdEditDialog, $q, $scope, AccountService, $mdDialog) {
     let vm = this;
 
     vm.contacts = {}
@@ -36,6 +36,7 @@
     vm.toggleFilter = toggleFilter;
     vm.filterAccounts = filterAccounts;
     vm.refreshAccounts = refreshAccounts;
+    vm.addAccount = addAccount;
 
     // Init
     vm.getAccounts();
@@ -78,6 +79,24 @@
         search: ''
       };
       vm.getAccounts();
+    }
+
+    function addAccount(ev) {
+      $mdDialog.show({
+        // controller: AccountNewController,
+        templateUrl: './modules/account/account-new/account-new.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: false // Only for -xs, -sm breakpoints.
+      })
+      .then(function(answer) {
+        $scope.status = 'You said the information was "' + answer + '".';
+      }, function() {
+        $scope.status = 'You cancelled the dialog.';
+      }).catch(function(err) {
+        console.log('error', err)
+      });
     }
     // /////
 
@@ -132,7 +151,8 @@
     $scope.logOrder = function(order) {
       console.log("order: ", order);
     };
-
-    
   }
+
+  // function AccountNewController($scope, $mdDialog) {
+  // }
 })();

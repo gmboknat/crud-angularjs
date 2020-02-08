@@ -1,0 +1,55 @@
+<md-dialog aria-label="New Account" ng-controller="AccountNewController as vm">
+  <form ng-cloak name="accountForm">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>New Account</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()">
+          <i class="material-icons">
+            close
+          </i>          
+
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+
+      <div layout="column">
+          <md-input-container class="md-block">
+            <label>First Name</label>
+            <input ng-model="vm.account.firstname" name="firstname" required>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Last Name</label>
+            <input ng-model="vm.account.lastname" name="lastname" required>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Gender</label>
+            <input ng-model="vm.account.gender" name="gender" required>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Email Address</label>
+            <input ng-model="vm.account.email"  name="email" required>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Phone Number</label>
+            <input ng-model="vm.account.phone" name="phone" required>
+          </md-input-container>
+        </div>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="vm.cancel()">
+       Cancel
+      </md-button>
+      <span flex></span>
+      <md-button type="submit" class="md-raised md-primary" ng-click="vm.save(accountForm)" ng-disabled="accountForm.$invalid">
+        Save
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
+Open a dialog over
