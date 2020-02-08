@@ -14,9 +14,10 @@
         $mdDialog.cancel();
       };
 
-      vm.save = function(answer) {
-        console.log('vm.save', vm.account, answer)
-        $mdDialog.hide(answer);
+      vm.save = function() {
+        AccountService.create(vm.account).then(function(result) {
+          if (result) $mdDialog.hide(result);
+        })
       };
   }
 })();

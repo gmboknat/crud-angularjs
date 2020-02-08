@@ -1,4 +1,4 @@
-<md-dialog aria-label="New Account" ng-controller="AccountNewController as vm">
+<md-dialog aria-label="New Account" ng-controller="AccountNewController as vm" class="account-new-modal">
   <form ng-cloak name="accountForm">
     <md-toolbar>
       <div class="md-toolbar-tools">
@@ -26,12 +26,8 @@
             <input ng-model="vm.account.lastname" name="lastname" required>
           </md-input-container>
           <md-input-container class="md-block">
-            <label>Gender</label>
-            <input ng-model="vm.account.gender" name="gender" required>
-          </md-input-container>
-          <md-input-container class="md-block">
             <label>Email Address</label>
-            <input ng-model="vm.account.email"  name="email" required>
+            <input ng-model="vm.account.email"  name="email" type="email" required>
           </md-input-container>
           <md-input-container class="md-block">
             <label>Phone Number</label>
@@ -46,10 +42,9 @@
        Cancel
       </md-button>
       <span flex></span>
-      <md-button type="submit" class="md-raised md-primary" ng-click="vm.save(accountForm)" ng-disabled="accountForm.$invalid">
+      <md-button type="submit" class="md-raised md-primary" ng-click="vm.save()" ng-disabled="accountForm.$invalid">
         Save
       </md-button>
     </md-dialog-actions>
   </form>
 </md-dialog>
-Open a dialog over
