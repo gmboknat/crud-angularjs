@@ -3,7 +3,8 @@
 
   angular
     .module("crudApp.account")
-    .controller("AccountListController", AccountListController);
+    .controller("AccountListController", AccountListController)
+    .controller("AccountNewEditController", AccountNewEditController);
 
   AccountListController.$inject = ["$mdEditDialog", "$q", "$scope", "AccountService", "$mdDialog"];
 
@@ -23,7 +24,7 @@
     vm.options = {
       rowSelection: true,
       multiSelect: true,
-      autoSelect: true,
+      autoSelect: false,
       boundaryLinks: false,
       limitSelect: true,
       pageSelect: true
@@ -36,7 +37,8 @@
     vm.toggleFilter = toggleFilter;
     vm.filterAccounts = filterAccounts;
     vm.refreshAccounts = refreshAccounts;
-    vm.addAccount = addAccount;
+    vm.addEditAccount = addEditAccount;
+    vm.editAccount = editAccount;
 
     // Init
     vm.getAccounts();
@@ -81,22 +83,29 @@
       vm.getAccounts();
     }
 
-    function addAccount(ev) {
+    function addEditAccount(ev, account) {
       $mdDialog.show({
-        // controller: AccountNewController,
-        templateUrl: './modules/account/account-new/account-new.html',
+        controller: AccountNewEditController,
+        controllerAs: 'vm',
+        templateUrl: './modules/account/account-new-edit/account-new-edit.html',
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose:true,
-        fullscreen: false // Only for -xs, -sm breakpoints.
+        fullscreen: false, // Only for -xs, -sm breakpoints.
+        locals: {
+          account: account
+        },
       })
-      .then(function(answer) {
-        $scope.status = 'You said the information was "' + answer + '".';
-      }, function() {
-        $scope.status = 'You cancelled the dialog.';
+      .then(function(result) {
+        if (result) vm.getAccounts();
       }).catch(function(err) {
         console.log('error', err)
       });
+    }
+
+    function editAccount(account) {
+      console.log('editttt', account)
+
     }
     // /////
 
@@ -158,4 +167,35 @@
 
   // function AccountNewController($scope, $mdDialog) {
   // }
+
+  AccountNewEditController.$inject = ["AccountService", "$mdDialog", "account"];
+
+  function AccountNewEditController(AccountService, $mdDialog, account) {
+    let vm = this;
+    if (account) {
+      vm.isEdit = true;
+      vm.account = angular.copy(account);
+    }
+    // vm.account = account;
+
+    // $scope.account = account;
+    console.log('account', account)
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    };
+
+    vm.save = function() {
+      let request;
+      if (!vm.isEdit) {
+        request = AccountService.create(vm.account)
+      } else {
+        request = AccountService.update(vm.account)
+      }
+
+      request.then(function(result) {
+        if (result) $mdDialog.hide(result);
+      })
+      
+    };
+  }
 })();

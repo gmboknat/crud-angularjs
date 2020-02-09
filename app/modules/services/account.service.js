@@ -9,9 +9,11 @@
 
   function AccountService($http) {
     const backendUrl = 'https://crud-sails.herokuapp.com/account';
+    // const backendUrl = 'http://localhost:1337/account'
     return {
       getAll: getAll,
       create: create,
+      update: update,
     };
 
     function getAll(query) {
@@ -44,5 +46,12 @@
       })
     }
 
+    function update(account) {
+      return $http.put(backendUrl + `/${account.id}`, account).then(function(result) {
+        return result.data;
+      }).catch(function(err) {
+        console.warn(' service errror', err)
+      })
+    }
   }
 })();

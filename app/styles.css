@@ -19,6 +19,15 @@ md-toolbar.md-table-toolbar form {
   margin-left: 16px;
 }
 
-.account-new-modal {
+.account-new-edit-modal {
   width: 400px;
+}
+
+md-table-container table th.center {
+  text-align: center !important;
+}
+
+md-dialog-actions {
+  padding-right: 24px !important;
+  padding-bottom: 12px;
 }

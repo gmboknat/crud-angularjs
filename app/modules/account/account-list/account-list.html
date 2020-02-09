@@ -14,7 +14,7 @@
           <md-button class="md-icon-button" ng-click="vm.toggleFilter()">
             <md-icon>filter_list</md-icon>
           </md-button>
-          <md-button class="md-icon-button" ng-click="vm.addAccount($event)">
+          <md-button class="md-icon-button" ng-click="vm.addEditAccount($event)">
             <md-icon>person_add</md-icon>
           </md-button>
         </div>
@@ -67,6 +67,7 @@
               <th md-column md-order-by="lastname"><span>Last Name</span></th>
               <th md-column md-order-by="email"><span>Email Address</span></th>
               <th md-column md-order-by="phone"><span>Phone Number</span></th>
+              <th md-column class="center"><span>Action</span></th>
             </tr>
           </thead>
           <tbody md-body>
@@ -81,6 +82,18 @@
               <td md-cell>{{contact.lastname}}</td>
               <td md-cell>{{contact.email}}</td>
               <td md-cell>{{contact.phone}}</td>
+              <td md-cell>
+                <md-button class="md-icon-button" aria-label="Edit" ng-click="vm.addEditAccount($event, contact)">
+                  <i class="material-icons">
+                    edit
+                    </i>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="Delete" ng-click="vm.deleteAccount(contact)">
+                  <i class="material-icons">
+                    delete
+                  </i>
+                </md-button>
+              </td>
             </tr>
           </tbody>
         </table>

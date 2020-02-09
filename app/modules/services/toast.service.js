@@ -1,9 +1,9 @@
 (function() {
   "use strict";
 
-  angular.module("crudApp").factory("toastFactory", toastFactory);
+  angular.module("crudApp").factory("toastService", toastService);
 
-  function toastFactory($mdToast) {
+  function toastService($mdToast) {
     var service = {
       error: error,
       success: success

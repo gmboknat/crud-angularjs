@@ -1,8 +1,8 @@
-<md-dialog aria-label="New Account" ng-controller="AccountNewController as vm" class="account-new-modal">
+<md-dialog aria-label="New Account" class="account-new-edit-modal">
   <form ng-cloak name="accountForm">
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h2>New Account</h2>
+        <h2>{{!vm.isEdit ? 'New' : 'Edit'}} Account</h2>
         <span flex></span>
         <md-button class="md-icon-button" ng-click="vm.cancel()">
           <i class="material-icons">
