@@ -61,7 +61,7 @@
           ng-model="vm.selected"
           md-progress="vm.promise"
         >
-          <thead md-head md-order="vm.query.order" md-on-reorder="logOrder">
+          <thead md-head md-order="vm.query.order" md-on-reorder="vm.sort">
             <tr md-row>
               <th md-column md-order-by="firstname"><span>First Name</span></th>
               <th md-column md-order-by="lastname"><span>Last Name</span></th>
@@ -83,12 +83,12 @@
               <td md-cell>{{contact.email}}</td>
               <td md-cell>{{contact.phone}}</td>
               <td md-cell>
-                <md-button class="md-icon-button" aria-label="Edit" ng-click="vm.addEditAccount($event, contact)">
+                <md-button class="md-icon-button md-primary" aria-label="Edit" ng-click="vm.addEditAccount($event, contact)">
                   <i class="material-icons">
                     edit
                     </i>
                 </md-button>
-                <md-button class="md-icon-button" aria-label="Delete" ng-click="vm.deleteAccount(contact)">
+                <md-button class="md-icon-button md-warn" aria-label="Delete" ng-click="vm.deleteAccount(contact.id)">
                   <i class="material-icons">
                     delete
                   </i>

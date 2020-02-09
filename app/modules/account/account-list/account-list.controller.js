@@ -38,7 +38,8 @@
     vm.filterAccounts = filterAccounts;
     vm.refreshAccounts = refreshAccounts;
     vm.addEditAccount = addEditAccount;
-    vm.editAccount = editAccount;
+    vm.deleteAccount = deleteAccount;
+    vm.sort = sort;
 
     // Init
     vm.getAccounts();
@@ -103,70 +104,18 @@
       });
     }
 
-    function editAccount(account) {
-      console.log('editttt', account)
-
+    function deleteAccount(accountId) {
+      console.log('deleting', accountId)
+      AccountService.delete(accountId).then(result => {
+        vm.getAccounts();
+      })
     }
-    // /////
 
-    
-
-    
-
-
-    $scope.editComment = function(event, dessert) {
-      event.stopPropagation(); // in case autoselect is enabled
-
-      var editDialog = {
-        modelValue: dessert.comment,
-        placeholder: "Add a comment",
-        save: function(input) {
-          if (input.$modelValue === "Donald Trump") {
-            input.$invalid = true;
-            return $q.reject();
-          }
-          if (input.$modelValue === "Bernie Sanders") {
-            return (dessert.comment = "FEEL THE BERN!");
-          }
-          dessert.comment = input.$modelValue;
-        },
-        targetEvent: event,
-        title: "Add a comment",
-        validators: {
-          "md-maxlength": 30
-        }
-      };
-
-      var promise;
-
-      
-      promise = $mdEditDialog.small(editDialog);
-
-      promise.then(function(ctrl) {
-        var input = ctrl.getInput();
-
-        input.$viewChangeListeners.push(function() {
-          input.$setValidity("test", input.$modelValue !== "test");
-        });
-      });
-    };
-
-    $scope.getTypes = function() {
-      return ["Candy", "Ice cream", "Other", "Pastry"];
-    };
-
-    
-
-    $scope.logOrder = function(order) {
+    function sort(order) {
       console.log("order: ", order, vm.query.order);
-      
       vm.getAccounts();
-
     };
   }
-
-  // function AccountNewController($scope, $mdDialog) {
-  // }
 
   AccountNewEditController.$inject = ["AccountService", "$mdDialog", "account"];
 
@@ -195,7 +144,6 @@
       request.then(function(result) {
         if (result) $mdDialog.hide(result);
       })
-      
     };
   }
 })();

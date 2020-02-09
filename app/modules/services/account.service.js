@@ -8,12 +8,12 @@
 
 
   function AccountService($http, toastService) {
-    // const backendUrl = 'https://crud-sails.herokuapp.com/account';
-    const backendUrl = 'http://localhost:1337/account'
+    const backendUrl = 'https://crud-sails.herokuapp.com/account';
     return {
       getAll: getAll,
       create: create,
       update: update,
+      delete: deleteAccount
     };
 
     function getAll(query) {
@@ -34,7 +34,8 @@
           return result.data;
         })
         .catch(function (err) {
-          console.warn('errrror', err)
+          toastService.error('Fetching Accounts Failed!')
+          console.warn('AccountService.getAll error', err)
         });
     }
 
@@ -44,7 +45,7 @@
         return result.data;
       }).catch(function(err) {
         toastService.error('Creating Account Failed!')
-        console.warn(' service errror', err)
+        console.warn('AccountService.create error', err)
       })
     }
 
@@ -54,7 +55,17 @@
         return result.data;
       }).catch(function(err) {
         toastService.error('Updating Account Failed!')
-        console.warn(' service errror', err)
+        console.warn('AccountService.update error', err)
+      })
+    }
+
+    function deleteAccount(accountId) {
+      return $http.delete(backendUrl + `/${accountId}`).then(function(result) {
+        toastService.success('Deleted Account Successfully!')
+        return result.data;
+      }).catch(function(err) {
+        toastService.error('Deleting Account Failed!')
+        console.warn('AccountService.delete error', err)
       })
     }
   }
