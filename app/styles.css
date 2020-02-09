@@ -31,3 +31,13 @@ md-dialog-actions {
   padding-right: 24px !important;
   padding-bottom: 12px;
 }
+
+
+/* md-toast.md-success-toast-theme .md-toast-content {
+  background-color: rgb(63,81,181);
+} */
+
+md-toast.md-error-toast-theme .md-toast-content {
+  background-color: rgb(244,67,54);
+}
+

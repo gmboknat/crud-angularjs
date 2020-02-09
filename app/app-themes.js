@@ -26,8 +26,6 @@
           "hue-2": "400",
           "hue-3": "800"
         });
-        $mdThemingProvider.theme('success-toast');
-        $mdThemingProvider.theme('error-toast');
         return $mdIconProvider.defaultIconSet('font/mdi.svg');
       };
 })();

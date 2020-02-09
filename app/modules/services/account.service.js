@@ -3,13 +3,13 @@
 
   angular.module("crudApp").factory("AccountService", AccountService);
 
-  AccountService.$inject = ['$http'];
+  AccountService.$inject = ['$http', 'toastService'];
 
 
 
-  function AccountService($http) {
-    const backendUrl = 'https://crud-sails.herokuapp.com/account';
-    // const backendUrl = 'http://localhost:1337/account'
+  function AccountService($http, toastService) {
+    // const backendUrl = 'https://crud-sails.herokuapp.com/account';
+    const backendUrl = 'http://localhost:1337/account'
     return {
       getAll: getAll,
       create: create,
@@ -40,16 +40,20 @@
 
     function create(newAccount) {
       return $http.post(backendUrl, newAccount).then(function(result) {
+        toastService.success('Created Account Successfully!')
         return result.data;
       }).catch(function(err) {
+        toastService.error('Creating Account Failed!')
         console.warn(' service errror', err)
       })
     }
 
     function update(account) {
       return $http.put(backendUrl + `/${account.id}`, account).then(function(result) {
+        toastService.success('Updated Account Successfully!')
         return result.data;
       }).catch(function(err) {
+        toastService.error('Updating Account Failed!')
         console.warn(' service errror', err)
       })
     }

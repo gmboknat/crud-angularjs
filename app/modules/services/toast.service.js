@@ -28,7 +28,7 @@
           .textContent(msg)
           .position("top right")
           .hideDelay(3000)
-          .theme("success-toast")
+          // .theme("success-toast")
       );
     }
   }
